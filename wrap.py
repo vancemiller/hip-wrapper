@@ -31,10 +31,10 @@ class FunctionInfo:
         else:
             arguments = arguments_list
 
-        n_tokens_first_arg = len(arguments.split(',')[0].split())
-        if n_tokens_first_arg == 1: # this is a forward declaration. ignore.
+        first_arg = arguments.split(',')[0].split()
+        if len(first_arg) == 1 and first_arg[0] != 'void': # this is a forward declaration. ignore.
             raise ValueError("Invalid function declaration")
-        if n_tokens_first_arg > 1:
+        if len(first_arg) > 1:
             self.parameters = ', '.join([p.split()[-1] for p in arguments.split(',')])
         else:
             self.parameters = ''
